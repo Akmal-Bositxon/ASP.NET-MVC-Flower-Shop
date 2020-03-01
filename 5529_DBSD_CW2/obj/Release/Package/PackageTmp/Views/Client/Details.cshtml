@@ -1,0 +1,68 @@
+﻿@model _00005529_DBSD_CW2.Models.Client
+
+@{
+    ViewBag.Title = "Details";
+}
+<div class="container">
+    <h2>Client</h2>
+
+    <div>
+        <h4>Details</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayName("Customer ID")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Customer_ID)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.FirstName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.LastName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.LastName)
+            </dd>
+
+            <dt>
+                @Html.DisplayName("Date of Birth:")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DateOfBirth)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Country)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Country)
+            </dd>
+
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        <button type="button" class="btn btn-warning" data-dismiss="modal">@Html.ActionLink("Edit", "Edit", new { id = Model.Customer_ID })</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">@Html.ActionLink("Back to List", "Index")</button>
+    </p>
+    </div>

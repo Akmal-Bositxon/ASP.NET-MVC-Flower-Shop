@@ -1,0 +1,61 @@
+﻿@model IEnumerable<_00005529_DBSD_CW2.Models.Wishlist>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Index","Flower")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Flow.FlowerName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Flow.Color)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Flow.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumberOfFlowers)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Comments)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Flow.FlowerName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Flow.Color)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Flow.Price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumberOfFlowers)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Comments)
+        </td>
+        @*<td>
+            @Html.ActionLink("Delete", "Delete", new {  id=item.WishId })
+        </td>*@
+    </tr>
+}
+
+</table>

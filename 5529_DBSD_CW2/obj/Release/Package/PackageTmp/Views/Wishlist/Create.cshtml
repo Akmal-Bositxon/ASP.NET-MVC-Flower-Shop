@@ -1,0 +1,93 @@
+﻿@model _00005529_DBSD_CW2.Models.Wishlist
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <h4>Wishlist</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @*@Html.LabelFor(model => model.FlowerId, htmlAttributes: new { @class = "control-label col-md-2", })*@
+     
+        <div class="col-md-10">
+            @*@Html.LabelFor(model => model.FlowerId, Request.Cookies["floweridcook"].Value, htmlAttributes: new { @class = "control-label", })*@
+            @Html.TextBox("FlowerIdC", Request.Cookies["floweridcook"].Value, new { @class = "form-control", @type="hidden"})
+            @*@Html.TextBoxFor(model => model.FlowerId, new { htmlAttributes = new { @class = "form-control", @Value = "aaaa", @type = "hidden" } })*@
+            @Html.ValidationMessageFor(model => model.FlowerId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @*@Html.LabelFor(model => model.Customer_id, "Customer Id", htmlAttributes: new { @class = "control-label col-md-2" ,@Value = Request.Cookies["userIdCook"].Value, })*@
+        <div class="col-md-10">
+            @Html.TextBox("UserID", Request.Cookies["userIdCook"].Value, new { @class = "form-control", @type = "hidden" })
+            @*@Html.TextBoxFor(model => model.FlowerId, new { htmlAttributes = new { @class = "form-control" } })*@
+            @Html.ValidationMessageFor(model => model.FlowerId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Flow.FlowerName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.LabelFor(model => model.Flow.FlowerName,Request.Cookies["flowernamecook"].Value, htmlAttributes: new { @class = "control-label ", })
+            @*@Html.TextBoxFor(model => model.Flow.FlowerName, Request.Cookies["flowernamecook"].Value, new { htmlAttributes = new { @class = "form-control" } })*@
+            @Html.ValidationMessageFor(model => model.Flow.FlowerName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Flow.Color, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.LabelFor(model => model.Flow.Color, Request.Cookies["flowercolorcook"].Value, htmlAttributes: new { @class = "control-label ", })
+            @*@Html.TextBoxFor(model => model.Flow.Color, Request.Cookies["flowercolorcook"].Value, new { htmlAttributes = new { @class = "form-control" } })*@
+            @Html.ValidationMessageFor(model => model.Flow.Color, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CreatedDate, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.LabelFor(model => model.Flow.FlowerName, DateTime.Now.ToString(), htmlAttributes: new { @class = "control-label ", })
+            @Html.EditorFor(model => model.CreatedDate, new { htmlAttributes = new { @class = "form-control", @Value = DateTime.Now.ToString(), @type="hidden"} })
+            @Html.ValidationMessageFor(model => model.CreatedDate, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.NumberOfFlowers, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.NumberOfFlowers, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.NumberOfFlowers, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Comments, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.Comments, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Comments, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

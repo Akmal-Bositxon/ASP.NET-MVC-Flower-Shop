@@ -1,0 +1,74 @@
+﻿@model _00005529_DBSD_CW2.Models.Client
+
+@{
+    ViewBag.Title = "Delete";
+}
+<div class="container">
+    <h2>Delete</h2>
+
+    <h3>Are you sure you want to delete this?</h3>
+    <div>
+        <h4>Your Information</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayName("Customer ID")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Customer_ID)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.FirstName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.LastName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.LastName)
+            </dd>
+
+            <dt>
+                @Html.DisplayName("Date of Birth:")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DateOfBirth)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Country)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Country)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @*@Html.AntiForgeryToken()*@
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-danger" />
+                <button type="button" class="btn btn-default" data-dismiss="modal">@Html.ActionLink("Back to List", "Index")</button>
+            </div>
+        }
+    </div>
+    </div>

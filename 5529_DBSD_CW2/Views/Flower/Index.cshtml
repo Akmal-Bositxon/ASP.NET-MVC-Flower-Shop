@@ -1,0 +1,110 @@
+﻿@using X.PagedList
+@using X.PagedList.Mvc
+@model IPagedList<_00005529_DBSD_CW2.Models.Flower>
+
+@{
+    ViewBag.Title = "Index";
+}
+<div class="container">
+    <h2>Flower List</h2>
+
+    <p>
+        @Html.ActionLink("Quick Book", "Create", "Booking")
+    </p>
+    <hr />
+    @using (Html.BeginForm())
+    {
+        <h4>--- Search Available Flower ---</h4>
+        <hr />
+        <div class="form-inline">
+
+
+            <div class="form-group">
+                @Html.Label("Flower Name: ", htmlAttributes: new { @class = "control-label" })
+                @Html.TextBox("FlowerNameFilter", "", new { @class = "form-control", placeholder = "Flower Name" })
+            </div>
+            <div class="form-group">
+                @Html.Label("Delivered Date: ", htmlAttributes: new { @class = "control-label" })
+                @Html.TextBox("DeliveredDateFilter", "", new { @class = "form-control datepicker", placeholder = "Delivered Date" })
+            </div>
+            <div class="form-group">
+                @Html.DropDownList(
+                    "ColorFilter"
+                    ,new SelectList(Enum.GetValues(typeof(_00005529_DBSD_CW2.Models.Colors)))
+                    , "-- select color--"
+                    , new { @class = "form-control", placeholder = "Reports to" })
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Filter" class="btn btn-info" />
+                </div>
+            </div>
+
+        </div>
+
+
+    }
+
+
+    <table class="table">
+        <tr>
+            <th>
+
+                @Html.ActionLink("Flower:", "Index", new { sortField = ViewBag.sortFieldFlower })
+            </th>
+            <th>
+                @Html.ActionLink("Dalivered Date:", "Index", new { sortFieldDate = ViewBag.sortFieldFlowerDate })
+            </th>
+            <th>
+                @Html.DisplayName("Color:")
+            </th>
+            <th>
+                @Html.ActionLink("Price:", "Index", new { sortFieldPrice = ViewBag.sortFieldFlowerPrice })
+            </th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FlowerName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DeliveredDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Color)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    <span style="margin:10px">@Html.ActionLink(" Add To WishList ", "Create", "Wishlist", new { id=item.FlowerId }, null)</span>
+                    @*<button type="button" class="btn btn-success" data-dismiss="modal">@Html.ActionLink("Add To WishList", "Create", "WishList", new { id = item.FlowerId })</button>*@
+
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    <div>
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+    </div>
+</div>
+
+@section head
+{
+    @Styles.Render("~/bundles/bootstrap-datepicker/css")
+    <link href="/Content/PagedList.css" rel="stylesheet" type="text/css" />
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/bootstrap-datepicker/js")
+    <script>
+        $(function() {
+            $('.datepicker').datepicker({ format: 'yyyy-MM-dd', todayBtn: true });
+        });
+    </script>
+}

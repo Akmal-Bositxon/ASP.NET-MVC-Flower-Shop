@@ -1,0 +1,131 @@
+﻿@using X.PagedList
+@using X.PagedList.Mvc
+@model IPagedList<_00005529_DBSD_CW2.Models.Client>
+
+@{
+    ViewBag.Title = "Index";
+}
+<div class="container">
+    <h2>Clients List</h2>
+
+    <p>
+        @Html.ActionLink("Create New Account", "Create")
+    </p>
+
+    @using (Html.BeginForm())
+    {
+        <div class="form-horizontal">
+            <hr />
+            <h4> --- Search Your Info Here To change --- </h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.Label("Last Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-3">
+                    @Html.TextBox("LastNameFilter")
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("Date Of Birth", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-2">
+                    @Html.TextBox("DateOfBirthFilter", "", new { @class = "form-control datepicker" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("Country", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-3">
+                    @Html.TextBox("CityFilter")
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Filter" class="btn btn-info" />
+                </div>
+            </div>
+        </div>
+
+    }
+
+
+    <table class="table">
+        <tr>
+            <th>
+
+                @Html.ActionLink("First Name", "Index", new { sortField = ViewBag.sortFieldFirstName })
+            </th>
+            <th>
+                @Html.ActionLink("Last Name", "Index", new { sortField = ViewBag.sortFieldLastName })
+            </th>
+            <th>
+                @Html.DisplayName("Date Of Birth")
+            </th>
+            <th>
+                @Html.DisplayName("Country")
+            </th>
+            <th>
+                @Html.DisplayName("Email")
+            </th>
+            <th>
+                @Html.DisplayName("User Name")
+            </th>
+            <th>
+                @Html.DisplayName("Phone Number")
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+            {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOfBirth)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Country)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhoneNumber)
+            </td>
+            <td>
+                <img src="@Url.Action("ShowPhoto", new {id =  item.Customer_ID})" width="50" />
+            </td>
+            <td>
+                <button type="button" class="btn btn-warning" data-dismiss="modal">@Html.ActionLink("Edit", "Edit", "Client", new { id = item.Customer_ID }, null)</button>
+                <button type="button" class="btn btn-info" data-dismiss="modal">@Html.ActionLink("Details", "Details", "Client", new { id = item.Customer_ID }, null)</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">@Html.ActionLink("Delete", "Delete", "Client", new { id = item.Customer_ID }, null)</button>
+            </td>
+        </tr>
+        }
+
+    </table>
+    <div>
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+    </div>
+    </div>
+
+    @section head
+{
+        @Styles.Render("~/bundles/bootstrap-datepicker/css")
+        <link href="/Content/PagedList.css" rel="stylesheet" type="text/css" />
+    }
+
+    @section scripts
+{
+        @Scripts.Render("~/bundles/bootstrap-datepicker/js")
+        <script>
+            $(function () {
+                $('.datepicker').datepicker({ format: 'yyyy-MM-dd', todayBtn: true });
+            });
+        </script>
+    }
